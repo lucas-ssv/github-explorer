@@ -1,4 +1,5 @@
-import { HttpGetClient } from '@/data/protocols/http'
+import { HttpGetClient, HttpStatusCode } from '@/data/protocols/http'
+import { BadRequestError } from '@/domain/errors'
 
 export class LoadRepositoryListSpy {
   constructor (
@@ -7,6 +8,9 @@ export class LoadRepositoryListSpy {
   ) {}
 
   async load (repository: string): Promise<void> {
-    await this.httpGetClientSpy.get(this.url, { params: { q: repository } })
+    const httpResponse = await this.httpGetClientSpy.get(this.url, { params: { q: repository } })
+    switch (httpResponse.statusCode) {
+      case HttpStatusCode.badRequest: throw new BadRequestError()
+    }
   }
 }
