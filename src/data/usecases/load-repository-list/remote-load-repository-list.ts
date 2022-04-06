@@ -7,6 +7,6 @@ export class LoadRepositoryListSpy {
   ) {}
 
   async load (repository: string): Promise<void> {
-    await this.httpGetClientSpy.get(this.url)
+    await this.httpGetClientSpy.get(this.url, { params: { q: repository } })
   }
 }
