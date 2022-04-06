@@ -1,5 +1,5 @@
-import { LoadRepositoryListSpy } from './remote-load-repository-list'
-import { HttpGetClientSpy } from '../../test'
+import { LoadRepositoryListSpy } from '@/data/usecases'
+import { HttpGetClientSpy } from '@/data/test'
 
 describe('LoadRepositoryList', () => {
   test('Should LoadRepositoryList calls HttpGetClient with correct url', async () => {

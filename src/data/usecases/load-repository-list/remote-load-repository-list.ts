@@ -1,4 +1,4 @@
-import { HttpGetClient } from '../../protocols/http'
+import { HttpGetClient } from '@/data/protocols/http'
 
 export class LoadRepositoryListSpy {
   constructor (
