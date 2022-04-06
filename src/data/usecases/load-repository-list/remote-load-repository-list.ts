@@ -1,5 +1,5 @@
 import { HttpGetClient, HttpStatusCode } from '@/data/protocols/http'
-import { BadRequestError } from '@/domain/errors'
+import { BadRequestError, NotFoundError } from '@/domain/errors'
 
 export class LoadRepositoryListSpy {
   constructor (
@@ -11,6 +11,7 @@ export class LoadRepositoryListSpy {
     const httpResponse = await this.httpGetClientSpy.get(this.url, { params: { q: repository } })
     switch (httpResponse.statusCode) {
       case HttpStatusCode.badRequest: throw new BadRequestError()
+      case HttpStatusCode.notFound: throw new NotFoundError()
     }
   }
 }
