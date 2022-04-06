@@ -2,13 +2,14 @@ import { LoadRepositoryListSpy } from '@/data/usecases'
 import { HttpGetClientSpy, mockRepositoryList } from '@/data/test'
 import { HttpStatusCode } from '@/data/protocols/http'
 import { BadRequestError, NotFoundError, ServerError } from '@/domain/errors'
+import { faker } from '@faker-js/faker'
 
 type SutTypes = {
   sut: LoadRepositoryListSpy
   httpGetClientSpy: HttpGetClientSpy
 }
 
-const makeSut = (url = 'any_url'): SutTypes => {
+const makeSut = (url = faker.internet.url()): SutTypes => {
   const httpGetClientSpy = new HttpGetClientSpy()
   const sut = new LoadRepositoryListSpy(url, httpGetClientSpy)
   return {
@@ -19,14 +20,14 @@ const makeSut = (url = 'any_url'): SutTypes => {
 
 describe('LoadRepositoryList', () => {
   test('Should LoadRepositoryList calls HttpGetClient with correct url', async () => {
-    const url = 'any_url'
+    const url = faker.internet.url()
     const { sut, httpGetClientSpy } = makeSut(url)
-    await sut.load('any_repo')
+    await sut.load(faker.random.word())
     expect(httpGetClientSpy.url).toBe(url)
   })
 
   test('Should LoadRepositoryList calls HttpGetClient with correct params', async () => {
-    const repository = 'any_repo'
+    const repository = faker.random.word()
     const { sut, httpGetClientSpy } = makeSut()
     await sut.load(repository)
     expect(httpGetClientSpy.options).toEqual({ params: { q: repository } })
@@ -37,7 +38,7 @@ describe('LoadRepositoryList', () => {
     httpGetClientSpy.response = {
       statusCode: HttpStatusCode.badRequest
     }
-    const promise = sut.load('any_repo')
+    const promise = sut.load(faker.random.word())
     await expect(promise).rejects.toThrow(new BadRequestError())
   })
 
@@ -46,7 +47,7 @@ describe('LoadRepositoryList', () => {
     httpGetClientSpy.response = {
       statusCode: HttpStatusCode.notFound
     }
-    const promise = sut.load('any_repo')
+    const promise = sut.load(faker.random.word())
     await expect(promise).rejects.toThrow(new NotFoundError())
   })
 
@@ -55,7 +56,7 @@ describe('LoadRepositoryList', () => {
     httpGetClientSpy.response = {
       statusCode: HttpStatusCode.serverError
     }
-    const promise = sut.load('any_repo')
+    const promise = sut.load(faker.random.word())
     await expect(promise).rejects.toThrow(new ServerError())
   })
 
@@ -66,7 +67,7 @@ describe('LoadRepositoryList', () => {
       statusCode: HttpStatusCode.ok,
       body: httpResponseMock
     }
-    const httpResponse = await sut.load('any_repo')
+    const httpResponse = await sut.load(faker.random.word())
     expect(httpResponse).toEqual(httpResponseMock)
   })
 })
