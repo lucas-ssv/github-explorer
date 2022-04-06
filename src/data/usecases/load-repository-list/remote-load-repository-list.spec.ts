@@ -1,5 +1,7 @@
 import { LoadRepositoryListSpy } from '@/data/usecases'
 import { HttpGetClientSpy } from '@/data/test'
+import { HttpStatusCode } from '@/data/protocols/http'
+import { BadRequestError } from '@/domain/errors'
 
 type SutTypes = {
   sut: LoadRepositoryListSpy
@@ -28,5 +30,14 @@ describe('LoadRepositoryList', () => {
     const { sut, httpGetClientSpy } = makeSut()
     await sut.load(repository)
     expect(httpGetClientSpy.options).toEqual({ params: { q: repository } })
+  })
+
+  test('Should LoadRepositoryList returns BadRequestError on status 400', async () => {
+    const { sut, httpGetClientSpy } = makeSut()
+    httpGetClientSpy.response = {
+      statusCode: HttpStatusCode.badRequest
+    }
+    const promise = sut.load('any_repo')
+    await expect(promise).rejects.toThrow(new BadRequestError())
   })
 })
