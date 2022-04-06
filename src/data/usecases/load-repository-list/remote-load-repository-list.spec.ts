@@ -1,7 +1,7 @@
 import { LoadRepositoryListSpy } from '@/data/usecases'
 import { HttpGetClientSpy } from '@/data/test'
 import { HttpStatusCode } from '@/data/protocols/http'
-import { BadRequestError, NotFoundError } from '@/domain/errors'
+import { BadRequestError, NotFoundError, ServerError } from '@/domain/errors'
 
 type SutTypes = {
   sut: LoadRepositoryListSpy
@@ -48,5 +48,14 @@ describe('LoadRepositoryList', () => {
     }
     const promise = sut.load('any_repo')
     await expect(promise).rejects.toThrow(new NotFoundError())
+  })
+
+  test('Should LoadRepositoryList returns ServerError on status 500', async () => {
+    const { sut, httpGetClientSpy } = makeSut()
+    httpGetClientSpy.response = {
+      statusCode: HttpStatusCode.serverError
+    }
+    const promise = sut.load('any_repo')
+    await expect(promise).rejects.toThrow(new ServerError())
   })
 })
