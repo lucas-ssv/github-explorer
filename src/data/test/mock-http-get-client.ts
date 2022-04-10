@@ -1,6 +1,6 @@
 import { HttpClient, HttpRequest, HttpResponse, HttpStatusCode } from '@/data/protocols/http'
 
-export class HttpGetClientSpy implements HttpClient {
+export class HttpClientSpy implements HttpClient {
   url: string
   params: object
   response: HttpResponse = {
