@@ -30,7 +30,7 @@ describe('LoadRepositoryList', () => {
     const repository = faker.random.word()
     const { sut, httpGetClientSpy } = makeSut()
     await sut.load(repository)
-    expect(httpGetClientSpy.options).toEqual({ params: { q: repository } })
+    expect(httpGetClientSpy.params).toEqual({ q: repository })
   })
 
   test('Should LoadRepositoryList returns BadRequestError on status 400', async () => {
