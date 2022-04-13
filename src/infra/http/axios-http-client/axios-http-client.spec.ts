@@ -1,15 +1,18 @@
 import { AxiosHttpClient } from '@/infra/http'
-import { mockHttpRequest, mockHttpResponse } from '@/infra/test'
-import axios from 'axios'
+import { HttpMethod } from '@/data/protocols/http'
+import { mockAxios } from '@/infra/test'
 
 jest.mock('axios')
 
 describe('AxiosHttpClient', () => {
   test('Should call axios with correct values', async () => {
-    const request = mockHttpRequest()
+    const request = {
+      url: 'any_url',
+      method: 'GET' as HttpMethod,
+      params: { q: 'any_param' }
+    }
+    const mockedAxios = mockAxios()
     const sut = new AxiosHttpClient()
-    const mockedAxios = axios as jest.Mocked<typeof axios>
-    mockedAxios.request.mockResolvedValue(mockHttpResponse)
     await sut.request(request)
     expect(mockedAxios.request).toHaveBeenCalledWith({
       url: request.url,

@@ -5,8 +5,8 @@ export class AxiosHttpClient {
   async request (data: HttpRequest): Promise<void> {
     await axios.request({
       url: data.url,
-      params: data.params,
-      method: data.method
+      method: data.method,
+      params: data.params
     })
   }
 }
