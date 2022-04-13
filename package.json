@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server --open",
     "test": "jest --clearMocks --runInBand --passWithNoTests",
     "test:watch": "npm run test -- --watch",
     "test:staged": "npm run test -- --findRelatedTests",
@@ -17,20 +18,32 @@
   "devDependencies": {
     "@faker-js/faker": "^6.1.2",
     "@types/jest": "^27.4.1",
+    "@types/react": "^18.0.3",
+    "@types/react-dom": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.1",
     "eslint": "^7.32.0",
     "eslint-config-standard-with-typescript": "^21.0.1",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.2.0",
     "git-commit-msg-linter": "^4.1.1",
+    "html-webpack-plugin": "^5.5.0",
     "husky": "^7.0.4",
     "jest": "^27.5.1",
     "lint-staged": "^12.3.7",
+    "style-loader": "^3.3.1",
     "ts-jest": "^27.1.4",
-    "typescript": "^4.6.3"
+    "ts-loader": "^9.2.8",
+    "typescript": "^4.6.3",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.8.1"
   },
   "dependencies": {
-    "axios": "^0.26.1"
+    "axios": "^0.26.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   }
 }
