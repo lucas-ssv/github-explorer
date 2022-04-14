@@ -41,10 +41,11 @@
     }
 
     form {
-      display: flex;
-      align-items: center;
-      position: relative;
       margin-bottom: 8rem;
+
+      .formContent {
+        position: relative;
+      }
 
       input {
         font-size: 1.25rem;
@@ -74,22 +75,40 @@
         border-radius: 0 5px 5px 0;
         position: absolute;
         right: 0;
+        top: 0;
         padding: 1.5rem;
+        transition: filter 0.2s;
+
+        &:hover {
+          filter: brightness(0.9);
+        }
+
+        &:disabled {
+          background: var(--gray-400);
+          filter: brightness(1);
+          cursor: initial;
+        }
 
         .loadingWrap {
           display: flex;
         }
       }
+
+      .error {
+        font-size: 1.125rem;
+        color: var(--red);
+        margin-top: 0.5rem;
+      }
     }
 
-    .cardsWrap {
+    .repositoriesWrap {
       display: grid;
       gap: 1rem;
 
-      .cardLink {
+      .repositoryLink {
         text-decoration: none;
 
-        .card {
+        .repository {
           display: flex;
           align-items: center;
           gap: 1.5rem;
@@ -134,7 +153,7 @@
       }
     }
 
-    .messageWrap {
+    .message {
       font-size: 1.125rem;
       font-weight: 500;
       color: var(--gray-500);
