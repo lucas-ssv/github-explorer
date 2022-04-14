@@ -8,7 +8,7 @@
     "test": "jest --clearMocks --runInBand --passWithNoTests",
     "test:watch": "npm run test -- --watch",
     "test:staged": "npm run test -- --findRelatedTests",
-    "test:ci": "npm test run -- --coverage",
+    "test:ci": "npm run test -- --coverage",
     "lint-staged": "lint-staged",
     "prepare": "husky install"
   },
