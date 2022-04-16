@@ -4,8 +4,9 @@ import { Header, Repository } from '@/presentation/components'
 import { RepositoryListContext } from '@/presentation/contexts'
 
 export const Home: React.FC = () => {
-  const [state] = useState({
+  const [state, setState] = useState({
     isLoading: false,
+    repository: '',
     repositories: [],
     error: ''
   })
@@ -17,8 +18,13 @@ export const Home: React.FC = () => {
         <h1>Explore repositórios no Github</h1>
         <form>
           <div className={Styles.formContent}>
-            <input type="text" placeholder="Digite aqui" />
-            <button data-testid="submit-button" type="submit" disabled>
+            <input
+              data-testid="repository-input"
+              type="text"
+              placeholder="Digite aqui"
+              onChange={e => setState(old => ({ ...old, repository: e.target.value }))}
+            />
+            <button data-testid="submit-button" type="submit" disabled={!state.repository}>
               <strong>Pesquisar</strong>
               {state.isLoading && (
                 <div data-testid="loading-wrap" className={Styles.loadingWrap}>
