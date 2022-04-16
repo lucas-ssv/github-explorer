@@ -1,9 +1,14 @@
-import { fireEvent, render, screen } from '@testing-library/react'
 import { Home } from '@/presentation/pages'
+import { fireEvent, render, screen } from '@testing-library/react'
+import { faker } from '@faker-js/faker'
+
+const makeSut = (): void => {
+  render(<Home />)
+}
 
 describe('HomePage', () => {
   test('Should start with initial state correct', () => {
-    render(<Home />)
+    makeSut()
     const loadingWrap = screen.queryByTestId('loading-wrap')
     const error = screen.queryByTestId('error')
     const repositoriesWrap = screen.queryByTestId('repositories-wrap')
@@ -17,9 +22,9 @@ describe('HomePage', () => {
   })
 
   test('Should enable submit button if form is valid', () => {
-    render(<Home />)
+    makeSut()
     const input = screen.getByTestId('repository-input')
-    fireEvent.input(input, { target: { value: 'any_repository' } })
+    fireEvent.input(input, { target: { value: faker.random.word() } })
     const submitButton = screen.getByTestId('submit-button')
     expect(submitButton).toBeEnabled()
   })
