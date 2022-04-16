@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { Home } from '@/presentation/pages'
 
 describe('HomePage', () => {
@@ -14,5 +14,13 @@ describe('HomePage', () => {
     expect(repositoriesWrap).toBeNull()
     expect(message).toBeInTheDocument()
     expect(submitButton).toBeDisabled()
+  })
+
+  test('Should enable submit button if form is valid', () => {
+    render(<Home />)
+    const input = screen.getByTestId('repository-input')
+    fireEvent.input(input, { target: { value: 'any_repository' } })
+    const submitButton = screen.getByTestId('submit-button')
+    expect(submitButton).toBeEnabled()
   })
 })
