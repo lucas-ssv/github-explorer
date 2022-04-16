@@ -28,4 +28,14 @@ describe('HomePage', () => {
     const submitButton = screen.getByTestId('submit-button')
     expect(submitButton).toBeEnabled()
   })
+
+  test('Should show loading if form is valid', () => {
+    makeSut()
+    const input = screen.getByTestId('repository-input')
+    fireEvent.input(input, { target: { value: faker.random.word() } })
+    const submitButton = screen.getByTestId('submit-button')
+    fireEvent.click(submitButton)
+    const loadingWrap = screen.queryByTestId('loading-wrap')
+    expect(loadingWrap).toBeInTheDocument()
+  })
 })
