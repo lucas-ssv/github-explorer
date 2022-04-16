@@ -1,17 +1,17 @@
-import { LoadRepositoryListSpy } from '@/data/usecases'
+import { RemoteLoadRepositoryListSpy } from '@/data/usecases'
 import { HttpClientSpy, mockRepositoryList } from '@/data/test'
 import { HttpStatusCode } from '@/data/protocols/http'
 import { BadRequestError, NotFoundError, ServerError } from '@/domain/errors'
 import { faker } from '@faker-js/faker'
 
 type SutTypes = {
-  sut: LoadRepositoryListSpy
+  sut: RemoteLoadRepositoryListSpy
   httpClientSpy: HttpClientSpy
 }
 
 const makeSut = (url = faker.internet.url()): SutTypes => {
   const httpClientSpy = new HttpClientSpy()
-  const sut = new LoadRepositoryListSpy(url, httpClientSpy)
+  const sut = new RemoteLoadRepositoryListSpy(url, httpClientSpy)
   return {
     sut,
     httpClientSpy
