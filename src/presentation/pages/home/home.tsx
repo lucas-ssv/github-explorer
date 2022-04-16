@@ -1,6 +1,7 @@
 import Styles from './home-styles.scss'
 import React, { useState } from 'react'
-import { Header } from '@/presentation/components'
+import { Header, Repository } from '@/presentation/components'
+import { RepositoryListContext } from '@/presentation/contexts'
 
 export const Home: React.FC = () => {
   const [state] = useState({
@@ -31,24 +32,9 @@ export const Home: React.FC = () => {
           </div>
           {state.error && <p data-testid="error" className={Styles.error}>error</p>}
         </form>
-        {state.repositories.length
-          ? (
-          <div data-testid="repositories-wrap" className={Styles.repositoriesWrap}>
-            <a href="#" className={Styles.repositoryLink}>
-              <div className={Styles.repository}>
-                <img
-                  src="https://images.unsplash.com/photo-1494959764136-6be9eb3c261e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&h=250&q=80"
-                  alt="Image profile"
-                />
-                <div className={Styles.profileInfo}>
-                  <strong>tiagoluchtenberg/repo</strong>
-                  <p>Descrição do repo</p>
-                </div>
-              </div>
-            </a>
-          </div>
-            )
-          : <strong data-testid="message" className={Styles.message}>Nada para mostrar...</strong>}
+        <RepositoryListContext.Provider value={{ repositories: state.repositories }}>
+          <Repository />
+        </RepositoryListContext.Provider>
       </section>
     </div>
   )
