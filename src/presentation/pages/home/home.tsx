@@ -18,6 +18,7 @@ export const Home: React.FC<Props> = ({ loadRepositoryList }: Props) => {
 
   const handleSubmit = async (event: FormEvent): Promise<void> => {
     event.preventDefault()
+    if (state.isLoading) return
     setState(old => ({ ...old, isLoading: true }))
     await loadRepositoryList.load(state.repository)
   }
