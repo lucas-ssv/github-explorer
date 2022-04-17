@@ -67,4 +67,14 @@ describe('HomePage', () => {
     fireEvent.click(submitButton)
     expect(loadRepositoryListSpy.callsCount).toBe(1)
   })
+
+  test('Should call LoadRepositoryList only once', () => {
+    const { loadRepositoryListSpy } = makeSut()
+    const input = screen.getByTestId('repository-input')
+    fireEvent.input(input, { target: { value: faker.random.word() } })
+    const submitButton = screen.getByTestId('submit-button')
+    fireEvent.click(submitButton)
+    fireEvent.click(submitButton)
+    expect(loadRepositoryListSpy.callsCount).toBe(1)
+  })
 })
