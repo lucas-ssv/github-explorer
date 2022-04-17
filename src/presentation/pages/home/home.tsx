@@ -2,8 +2,13 @@ import Styles from './home-styles.scss'
 import React, { FormEvent, useState } from 'react'
 import { Header, Repository } from '@/presentation/components'
 import { RepositoryListContext } from '@/presentation/contexts'
+import { LoadRepositoryList } from '@/domain/usecases'
 
-export const Home: React.FC = () => {
+type Props = {
+  loadRepositoryList: LoadRepositoryList
+}
+
+export const Home: React.FC<Props> = ({ loadRepositoryList }: Props) => {
   const [state, setState] = useState({
     isLoading: false,
     repository: '',
@@ -11,9 +16,10 @@ export const Home: React.FC = () => {
     error: ''
   })
 
-  const handleSubmit = (event: FormEvent): void => {
+  const handleSubmit = async (event: FormEvent): Promise<void> => {
     event.preventDefault()
     setState(old => ({ ...old, isLoading: true }))
+    await loadRepositoryList.load(state.repository)
   }
 
   return (
