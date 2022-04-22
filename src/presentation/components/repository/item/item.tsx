@@ -1,5 +1,6 @@
 import { RepositoryList } from '@/domain/models'
 import Styles from './item-styles.scss'
+import { Link } from 'react-router-dom'
 import React from 'react'
 
 type Props = {
@@ -8,7 +9,7 @@ type Props = {
 
 export const RepositoryItem: React.FC<Props> = ({ repository }: Props) => {
   return (
-    <a data-testid="repository-item" href="#" className={Styles.repositoryLink}>
+    <Link data-testid="repository-item" to={`/${repository.name}`} className={Styles.repositoryLink}>
       <div className={Styles.repository}>
         <img
           data-testid="image-profile"
@@ -20,6 +21,6 @@ export const RepositoryItem: React.FC<Props> = ({ repository }: Props) => {
           <p data-testid="description">{repository.description}</p>
         </div>
       </div>
-    </a>
+    </Link>
   )
 }
