@@ -1,6 +1,7 @@
 import { Home } from '@/presentation/pages'
 import { LoadRepositoryList } from '@/domain/usecases'
 import { RepositoryListModel } from '@/domain/models'
+import { UnexpectedError } from '@/domain/errors'
 import { mockRepositoryList } from '@/data/test'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
@@ -18,8 +19,7 @@ class LoadRepositoryListSpy implements LoadRepositoryList {
   }
 }
 
-const makeSut = (): SutTypes => {
-  const loadRepositoryListSpy = new LoadRepositoryListSpy()
+const makeSut = (loadRepositoryListSpy = new LoadRepositoryListSpy()): SutTypes => {
   render(<Home loadRepositoryList={loadRepositoryListSpy} />)
   return {
     loadRepositoryListSpy
@@ -90,5 +90,21 @@ describe('HomePage', () => {
     await waitFor(() => screen.getByTestId('repositories-wrap'))
     const repositoryItem = screen.getAllByTestId('repository-item')
     expect(repositoryItem).toHaveLength(2)
+  })
+
+  test('Should render UnexpectedError on fails', async () => {
+    const loadRepositoryListSpy = new LoadRepositoryListSpy()
+    const error = new UnexpectedError()
+    jest.spyOn(loadRepositoryListSpy, 'load').mockRejectedValueOnce(error)
+    makeSut(loadRepositoryListSpy)
+    const input = screen.getByTestId('repository-input')
+    fireEvent.input(input, { target: { value: faker.random.word() } })
+    const submitButton = screen.getByTestId('submit-button')
+    fireEvent.click(submitButton)
+    await waitFor(() => screen.getByTestId('error'))
+    const errorWrap = screen.queryByTestId('error')
+    expect(screen.queryByTestId('repositories-wrap')).toBeNull()
+    expect(errorWrap).toBeInTheDocument()
+    expect(errorWrap).toHaveTextContent(error.message)
   })
 })
