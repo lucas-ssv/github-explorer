@@ -1,22 +1,11 @@
 import { Home } from '@/presentation/pages'
-import { LoadRepositoryList } from '@/domain/usecases'
-import { RepositoryListModel } from '@/domain/models'
+import { LoadRepositoryListSpy } from '@/domain/test'
 import { UnexpectedError } from '@/domain/errors'
-import { mockRepositoryList } from '@/data/test'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
 
 type SutTypes = {
   loadRepositoryListSpy: LoadRepositoryListSpy
-}
-
-class LoadRepositoryListSpy implements LoadRepositoryList {
-  callsCount = 0
-
-  async load (repository: string): Promise<RepositoryListModel> {
-    this.callsCount++
-    return await Promise.resolve(mockRepositoryList())
-  }
 }
 
 const makeSut = (loadRepositoryListSpy = new LoadRepositoryListSpy()): SutTypes => {
