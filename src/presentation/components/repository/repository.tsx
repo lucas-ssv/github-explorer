@@ -1,8 +1,9 @@
+import { RepositoryList } from '@/domain/models'
 import { RepositoryListContext } from '@/presentation/contexts'
+import { RepositoryList as List } from './list/list'
+import { RepositoryItem } from './item/item'
 import Styles from './repository-styles.scss'
 import React, { useContext } from 'react'
-import { RepositoryItem } from './item/item'
-import { RepositoryList } from './list/list'
 
 export const Repository: React.FC = () => {
   const { repositories } = useContext(RepositoryListContext)
@@ -10,9 +11,11 @@ export const Repository: React.FC = () => {
   return (
     repositories.length
       ? (
-        <RepositoryList>
-          <RepositoryItem />
-        </RepositoryList>
+        <List>
+          {repositories.map((repository: RepositoryList) => (
+            <RepositoryItem key={repository.id} />
+          ))}
+        </List>
         )
       : <strong data-testid="message" className={Styles.message}>Nada para mostrar...</strong>
   )

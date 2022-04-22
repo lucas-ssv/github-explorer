@@ -20,7 +20,8 @@ export const Home: React.FC<Props> = ({ loadRepositoryList }: Props) => {
     event.preventDefault()
     if (state.isLoading) return
     setState(old => ({ ...old, isLoading: true }))
-    await loadRepositoryList.load(state.repository)
+    const { repositories } = await loadRepositoryList.load(state.repository)
+    setState(old => ({ ...old, repositories }))
   }
 
   return (
