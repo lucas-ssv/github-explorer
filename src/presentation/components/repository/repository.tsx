@@ -13,7 +13,7 @@ export const Repository: React.FC = () => {
       ? (
         <List>
           {repositories.map((repository: RepositoryList) => (
-            <RepositoryItem key={repository.id} />
+            <RepositoryItem key={repository.id} repository={repository} />
           ))}
         </List>
         )

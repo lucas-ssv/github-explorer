@@ -13,5 +13,6 @@ export interface RepositoryList {
   issuesCount: number
   owner: {
     name: string
+    avatar_url: string
   }
 }
