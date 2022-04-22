@@ -18,10 +18,14 @@ export const Home: React.FC<Props> = ({ loadRepositoryList }: Props) => {
 
   const handleSubmit = async (event: FormEvent): Promise<void> => {
     event.preventDefault()
-    if (state.isLoading) return
-    setState(old => ({ ...old, isLoading: true }))
-    const { repositories } = await loadRepositoryList.load(state.repository)
-    setState(old => ({ ...old, repositories }))
+    try {
+      if (state.isLoading) return
+      setState(old => ({ ...old, isLoading: true }))
+      const { repositories } = await loadRepositoryList.load(state.repository)
+      setState(old => ({ ...old, repositories }))
+    } catch (error) {
+      setState(old => ({ ...old, isLoading: false, error: error.message }))
+    }
   }
 
   return (
@@ -50,7 +54,7 @@ export const Home: React.FC<Props> = ({ loadRepositoryList }: Props) => {
                 : <strong>Pesquisar</strong>}
             </button>
           </div>
-          {state.error && <p data-testid="error" className={Styles.error}>error</p>}
+          {state.error && <p data-testid="error" className={Styles.error}>{state.error}</p>}
         </form>
         <RepositoryListContext.Provider value={{ repositories: state.repositories }}>
           <Repository />
