@@ -1,9 +1,24 @@
 import { RepositoryItem } from './item'
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { mockRepositoryList } from '@/data/test'
+import { RepositoryList } from '@/domain/models'
+import { createMemoryHistory, MemoryHistory } from 'history'
+import { Router } from 'react-router-dom'
 
-const makeSut = (repositoryListMock = mockRepositoryList()): void => {
-  render(<RepositoryItem repository={repositoryListMock} />)
+type SutTypes = {
+  history: MemoryHistory
+}
+
+const makeSut = (repositoryListMock: RepositoryList): SutTypes => {
+  const history = createMemoryHistory()
+  render(
+    <Router location={history.location} navigator={history}>
+      <RepositoryItem repository={repositoryListMock} />
+    </Router>
+  )
+  return {
+    history
+  }
 }
 
 describe('RepositoryItem', () => {
@@ -14,5 +29,13 @@ describe('RepositoryItem', () => {
     expect(screen.getByTestId('image-profile')).toHaveProperty('alt', repositoryListMock.owner.name)
     expect(screen.getByTestId('full-name')).toHaveTextContent(repositoryListMock.fullName)
     expect(screen.getByTestId('description')).toHaveTextContent(repositoryListMock.description)
+  })
+
+  test('Should go to repository page', () => {
+    const repositoryListMock = mockRepositoryList()
+    const { history } = makeSut(repositoryListMock)
+    const link = screen.getByTestId('repository-item')
+    fireEvent.click(link)
+    expect(history.location.pathname).toBe(`/${repositoryListMock.name}`)
   })
 })

@@ -2,6 +2,8 @@ import { Home } from '@/presentation/pages'
 import { LoadRepositoryListSpy } from '@/domain/test'
 import { UnexpectedError } from '@/domain/errors'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { Router } from 'react-router-dom'
+import { createMemoryHistory } from 'history'
 import { faker } from '@faker-js/faker'
 
 type SutTypes = {
@@ -9,7 +11,12 @@ type SutTypes = {
 }
 
 const makeSut = (loadRepositoryListSpy = new LoadRepositoryListSpy()): SutTypes => {
-  render(<Home loadRepositoryList={loadRepositoryListSpy} />)
+  const history = createMemoryHistory()
+  render(
+    <Router location={history.location} navigator={history}>
+      <Home loadRepositoryList={loadRepositoryListSpy} />
+    </Router>
+  )
   return {
     loadRepositoryListSpy
   }
