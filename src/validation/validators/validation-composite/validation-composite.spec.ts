@@ -12,4 +12,14 @@ describe('ValidationComposite', () => {
     const error = sut.validate('any_field', { any_field: 'any_value' })
     expect(error).toBe('any_error')
   })
+
+  test('Should return success if no validation fails', () => {
+    const fieldValidationsSpy = [
+      new FieldValidationSpy('any_field'),
+      new FieldValidationSpy('other_field')
+    ]
+    const sut = new ValidationComposite(fieldValidationsSpy)
+    const error = sut.validate('any_field', { any_field: 'any_value' })
+    expect(error).toBeFalsy()
+  })
 })
