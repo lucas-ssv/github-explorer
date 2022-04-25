@@ -1,5 +1,5 @@
 export interface RepositoryListModel {
-  repositories: RepositoryList[]
+  items: RepositoryList[]
 }
 
 export interface RepositoryList {

@@ -3,7 +3,7 @@ import { LoadRepositoryList } from '@/domain/usecases'
 import { HttpClient, HttpStatusCode } from '@/data/protocols/http'
 import { BadRequestError, NotFoundError, ServerError } from '@/domain/errors'
 
-export class RemoteLoadRepositoryListSpy implements LoadRepositoryList {
+export class RemoteLoadRepositoryList implements LoadRepositoryList {
   constructor (
     private readonly url: string,
     private readonly httpGetClientSpy: HttpClient

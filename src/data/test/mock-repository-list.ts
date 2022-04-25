@@ -17,7 +17,7 @@ export const mockRepositoryList = (): RepositoryList => ({
 })
 
 export const mockRepositoryListModel = (): RepositoryListModel => ({
-  repositories: [
+  items: [
     mockRepositoryList(),
     mockRepositoryList()
   ]
