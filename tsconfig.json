@@ -18,4 +18,9 @@
       "@/*": ["*"]
     }
   },
+  "exclude": [
+    "./jest.config.js",
+    "./webpack.config.js",
+    "./coverage"
+  ]
 }
