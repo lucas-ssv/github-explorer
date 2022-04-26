@@ -45,7 +45,7 @@ describe('HomePage', () => {
     expect(submitButton).toBeEnabled()
   })
 
-  test('Should show loading if form is valid', async () => {
+  test('Should not present loading on finish request', async () => {
     makeSut()
     const input = screen.getByTestId('repository-input')
     fireEvent.input(input, { target: { value: faker.random.word() } })
@@ -53,7 +53,7 @@ describe('HomePage', () => {
     fireEvent.click(submitButton)
     await waitFor(() => screen.getByTestId('repositories-wrap'))
     const loadingWrap = screen.queryByTestId('loading-wrap')
-    expect(loadingWrap).toBeInTheDocument()
+    expect(loadingWrap).not.toBeInTheDocument()
   })
 
   test('Should clear input if form is valid', async () => {
