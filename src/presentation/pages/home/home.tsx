@@ -22,7 +22,7 @@ export const Home: React.FC<Props> = ({ loadRepositoryList }: Props) => {
     setState(old => ({ ...old, isLoading: true }))
     try {
       const { items } = await loadRepositoryList.load(state.repository)
-      setState(old => ({ ...old, repositories: items, repository: '' }))
+      setState(old => ({ ...old, repositories: items, repository: '', isLoading: false }))
     } catch (error) {
       setState(old => ({ ...old, isLoading: false, error: error.message }))
     }
