@@ -45,6 +45,16 @@ describe('HomePage', () => {
     expect(submitButton).toBeEnabled()
   })
 
+  test('Should show loading if form is valid', async () => {
+    makeSut()
+    const input = screen.getByTestId('repository-input')
+    fireEvent.input(input, { target: { value: faker.random.word() } })
+    const submitButton = screen.getByTestId('submit-button')
+    fireEvent.click(submitButton)
+    expect(screen.queryByTestId('loading-wrap')).toBeInTheDocument()
+    await waitFor(() => screen.getByTestId('repositories-wrap'))
+  })
+
   test('Should not present loading on finish request', async () => {
     makeSut()
     const input = screen.getByTestId('repository-input')
