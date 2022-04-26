@@ -18,11 +18,11 @@ export const Home: React.FC<Props> = ({ loadRepositoryList }: Props) => {
 
   const handleSubmit = async (event: FormEvent): Promise<void> => {
     event.preventDefault()
+    if (state.isLoading) return
+    setState(old => ({ ...old, isLoading: true }))
     try {
-      if (state.isLoading) return
-      setState(old => ({ ...old, isLoading: true }))
       const { items } = await loadRepositoryList.load(state.repository)
-      setState(old => ({ ...old, repositories: items }))
+      setState(old => ({ ...old, repositories: items, repository: '' }))
     } catch (error) {
       setState(old => ({ ...old, isLoading: false, error: error.message }))
     }
@@ -39,6 +39,7 @@ export const Home: React.FC<Props> = ({ loadRepositoryList }: Props) => {
               data-testid="repository-input"
               type="text"
               placeholder="Digite aqui"
+              value={state.repository}
               onChange={e => setState(old => ({ ...old, repository: e.target.value }))}
             />
             <button data-testid="submit-button" type="submit" disabled={!state.repository}>
