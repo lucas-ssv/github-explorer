@@ -1,5 +1,5 @@
 import Styles from './home-styles.scss'
-import React, { FormEvent, useState } from 'react'
+import React, { FormEvent, useRef, useState } from 'react'
 import { Header, Repository } from '@/presentation/components'
 import { RepositoryListContext } from '@/presentation/contexts'
 import { LoadRepositoryList } from '@/domain/usecases'
@@ -9,6 +9,7 @@ type Props = {
 }
 
 export const Home: React.FC<Props> = ({ loadRepositoryList }: Props) => {
+  const inputRef = useRef<HTMLInputElement>()
   const [state, setState] = useState({
     isLoading: false,
     repository: '',
@@ -23,6 +24,7 @@ export const Home: React.FC<Props> = ({ loadRepositoryList }: Props) => {
     try {
       const { items } = await loadRepositoryList.load(state.repository)
       setState(old => ({ ...old, repositories: items, repository: '', isLoading: false }))
+      inputRef.current.focus()
     } catch (error) {
       setState(old => ({ ...old, isLoading: false, error: error.message }))
     }
@@ -41,6 +43,7 @@ export const Home: React.FC<Props> = ({ loadRepositoryList }: Props) => {
               placeholder="Digite aqui"
               value={state.repository}
               onChange={e => setState(old => ({ ...old, repository: e.target.value }))}
+              ref={inputRef}
             />
             <button data-testid="submit-button" type="submit" disabled={!state.repository}>
               {state.isLoading
