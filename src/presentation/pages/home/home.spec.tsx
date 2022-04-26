@@ -76,6 +76,16 @@ describe('HomePage', () => {
     expect(input).not.toHaveValue()
   })
 
+  test('Should focus input if form is valid', async () => {
+    makeSut()
+    const input = screen.getByTestId('repository-input')
+    fireEvent.input(input, { target: { value: faker.random.word() } })
+    const submitButton = screen.getByTestId('submit-button')
+    fireEvent.click(submitButton)
+    await waitFor(() => screen.getByTestId('repositories-wrap'))
+    expect(input).toHaveFocus()
+  })
+
   test('Should call LoadRepositoryList on submit button', async () => {
     const { loadRepositoryListSpy } = makeSut()
     const input = screen.getByTestId('repository-input')
