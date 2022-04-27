@@ -1,3 +1,3 @@
 export const makeApiUrl = (): string => {
-  return 'https://api.github.com/search/repositories'
+  return process.env.API_URL
 }

@@ -1,4 +1,5 @@
 const path = require('path')
+const { EnvironmentPlugin } = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
@@ -38,6 +39,9 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new EnvironmentPlugin({
+      API_URL: 'https://api.github.com/search/repositories'
+    }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public', 'index.html'),
       filename: 'index.html'
