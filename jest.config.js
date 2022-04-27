@@ -3,7 +3,8 @@ module.exports = {
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{ts,tsx}',
     '!<rootDir>/src/domain/**/*',
-    '!<rootDir>/src/main/**/*'
+    '!<rootDir>/src/main/**/*',
+    '!<rootDir>/src/validation/protocols/index.ts'
   ],
   coverageDirectory: 'coverage',
   testEnvironment: 'jsdom',
