@@ -43,7 +43,9 @@ describe('AxiosHttpClient', () => {
 
   test('Should return correct error on axios', () => {
     const { sut, mockedAxios } = makeSut()
-    mockedAxios.request.mockRejectedValue(mockHttpResponse())
+    mockedAxios.request.mockRejectedValue({
+      response: mockHttpResponse()
+    })
     const promise = sut.request(mockHttpRequest())
     expect(promise).toEqual(mockedAxios.request.mock.results[0].value)
   })
