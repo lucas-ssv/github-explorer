@@ -1,16 +1,10 @@
 version: 2.1
 jobs:
-  build:
+  Using-node:
     docker:
-      - image: alpine:3.15
+      - image: cimg/node:17.2
     steps:
-      - checkout
       - run:
-          name: Install packages
-          command: npm install
-      - run:
-          name: The First Step
-          command: eslint 'src/**'
-      - run:
-          name: The Second Step
-          command: npm run test:coveralls
+          name: Running the Node Containers
+          command: |
+            node -v
