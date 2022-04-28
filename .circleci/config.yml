@@ -1,12 +1,15 @@
+version: 2.1
 jobs:
-  build_and_test:
+  build:
     docker:
-      - image: cimg/node:16.13.0
+      - image: alpine:3.15
     steps:
-      - checkout
       - run:
-          name: eslint
+          name: Install packages
+          command: npm install
+      - run:
+          name: The First Step
           command: eslint 'src/**'
       - run:
-          name: coveralls
+          name: The Second Step
           command: npm run test:coveralls
