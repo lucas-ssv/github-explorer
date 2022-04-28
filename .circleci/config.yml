@@ -4,6 +4,10 @@ jobs:
     docker:
       - image: alpine:3.15
     steps:
+      - checkout
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
       - run:
           name: Install packages
           command: npm install
