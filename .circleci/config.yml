@@ -1,10 +1,11 @@
 version: 2.1
 jobs:
-  Using-node:
+  build:
     docker:
-      - image: cimg/node:17.2
+      - image: cimg/base:2021.04
     steps:
+      - checkout
       - run:
-          name: Running the Node Containers
+          name: The First Step
           command: |
             node -v
