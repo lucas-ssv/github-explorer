@@ -6,9 +6,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: update-npm
-          command: 'sudo npm install -g npm@latest'
-      - run:
           name: Install packages
           command: npm install
       - run:
