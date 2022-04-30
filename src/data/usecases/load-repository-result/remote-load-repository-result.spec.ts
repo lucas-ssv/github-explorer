@@ -1,17 +1,17 @@
-import { LoadRepositoryResult } from '@/data/usecases'
+import { RemoteLoadRepositoryResult } from '@/data/usecases'
 import { HttpStatusCode } from '@/data/protocols/http'
-import { HttpClientSpy } from '@/data/test'
+import { HttpClientSpy, mockRepositoryResult } from '@/data/test'
 import { BadRequestError, NotFoundError, ServerError } from '@/domain/errors'
 import { faker } from '@faker-js/faker'
 
 type SutTypes = {
-  sut: LoadRepositoryResult
+  sut: RemoteLoadRepositoryResult
   httpClientSpy: HttpClientSpy
 }
 
 const makeSut = (url = faker.internet.url()): SutTypes => {
   const httpClientSpy = new HttpClientSpy()
-  const sut = new LoadRepositoryResult(url, httpClientSpy)
+  const sut = new RemoteLoadRepositoryResult(url, httpClientSpy)
   return {
     sut,
     httpClientSpy
@@ -51,5 +51,16 @@ describe('LoadRepositoryResult', () => {
     }
     const promise = sut.load()
     await expect(promise).rejects.toThrow(new ServerError())
+  })
+
+  test('Should LoadRepositoryResult returns RepositoryResult on status 200', async () => {
+    const { sut, httpClientSpy } = makeSut()
+    const httpResponseMock = mockRepositoryResult()
+    httpClientSpy.response = {
+      statusCode: HttpStatusCode.ok,
+      body: httpResponseMock
+    }
+    const httpResponse = await sut.load()
+    expect(httpResponse).toEqual(httpResponseMock)
   })
 })
