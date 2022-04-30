@@ -1,4 +1,5 @@
 export interface RepositoryResultModel {
+  id: number
   name: string
   fullName: string
   description: string
