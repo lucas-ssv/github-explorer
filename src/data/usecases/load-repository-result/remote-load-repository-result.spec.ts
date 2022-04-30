@@ -1,7 +1,7 @@
 import { LoadRepositoryResult } from '@/data/usecases'
 import { HttpStatusCode } from '@/data/protocols/http'
 import { HttpClientSpy } from '@/data/test'
-import { BadRequestError, NotFoundError } from '@/domain/errors'
+import { BadRequestError, NotFoundError, ServerError } from '@/domain/errors'
 import { faker } from '@faker-js/faker'
 
 type SutTypes = {
@@ -42,5 +42,14 @@ describe('LoadRepositoryResult', () => {
     }
     const promise = sut.load()
     await expect(promise).rejects.toThrow(new NotFoundError())
+  })
+
+  test('Should LoadRepositoryResult returns ServerError on status 500', async () => {
+    const { sut, httpClientSpy } = makeSut()
+    httpClientSpy.response = {
+      statusCode: HttpStatusCode.serverError
+    }
+    const promise = sut.load()
+    await expect(promise).rejects.toThrow(new ServerError())
   })
 })
