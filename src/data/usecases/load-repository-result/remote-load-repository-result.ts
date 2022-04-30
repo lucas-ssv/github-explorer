@@ -1,5 +1,5 @@
 import { HttpClient, HttpStatusCode } from '@/data/protocols/http'
-import { BadRequestError, NotFoundError } from '@/domain/errors'
+import { BadRequestError, NotFoundError, ServerError } from '@/domain/errors'
 
 export class LoadRepositoryResult {
   constructor (
@@ -12,6 +12,7 @@ export class LoadRepositoryResult {
     switch (httpResponse.statusCode) {
       case HttpStatusCode.badRequest: throw new BadRequestError()
       case HttpStatusCode.notFound: throw new NotFoundError()
+      case HttpStatusCode.serverError: throw new ServerError()
     }
   }
 }
