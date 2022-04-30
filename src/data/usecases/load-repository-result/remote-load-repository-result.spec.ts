@@ -1,7 +1,7 @@
 import { LoadRepositoryResult } from '@/data/usecases'
 import { HttpStatusCode } from '@/data/protocols/http'
 import { HttpClientSpy } from '@/data/test'
-import { BadRequestError } from '@/domain/errors'
+import { BadRequestError, NotFoundError } from '@/domain/errors'
 import { faker } from '@faker-js/faker'
 
 type SutTypes = {
@@ -33,5 +33,14 @@ describe('LoadRepositoryResult', () => {
     }
     const promise = sut.load()
     await expect(promise).rejects.toThrow(new BadRequestError())
+  })
+
+  test('Should LoadRepositoryResult returns NotFoundError on status 404', async () => {
+    const { sut, httpClientSpy } = makeSut()
+    httpClientSpy.response = {
+      statusCode: HttpStatusCode.notFound
+    }
+    const promise = sut.load()
+    await expect(promise).rejects.toThrow(new NotFoundError())
   })
 })
