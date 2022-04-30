@@ -1,4 +1,5 @@
-import { HttpClient } from '@/data/protocols/http'
+import { HttpClient, HttpStatusCode } from '@/data/protocols/http'
+import { BadRequestError } from '@/domain/errors'
 
 export class LoadRepositoryResult {
   constructor (
@@ -7,6 +8,9 @@ export class LoadRepositoryResult {
   ) { }
 
   async load (): Promise<void> {
-    await this.httpClient.request({ method: 'GET', url: this.url })
+    const httpResponse = await this.httpClient.request({ method: 'GET', url: this.url })
+    switch (httpResponse.statusCode) {
+      case HttpStatusCode.badRequest: throw new BadRequestError()
+    }
   }
 }
