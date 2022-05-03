@@ -1,5 +1,6 @@
-.homeWrap {
+.userWrap {
   max-width: 714px;
+  min-height: 100vh;
   width: 100%;
   margin: 0 auto;
   position: relative;
@@ -15,74 +16,54 @@
     z-index: -1;
   }
 
-  .homeContent {
-    margin: 2rem 0;
+  .repositoryContent {
+    margin: 3rem 0;
 
-    h1 {
-      max-width: 433px;
-      font-size: 3rem;
-      color: var(--gray-700);
-      padding: 2rem 0;
+    .repositoryInfo {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+
+      img {
+        width: 120px;
+        height: 120px;
+        border-radius: 60px;
+      }
+
+      .ownerInfo {
+        flex: 1;
+
+        strong {
+          font-size: 2.25rem;
+          color: var(--light-text);
+          font-weight: 700;
+        }
+
+        p {
+          font-size: 1.25rem;
+          color: var(--gray-500);
+          margin-top: 0.75rem;
+        }
+      }
     }
 
-    form {
-      margin-bottom: 8rem;
+    .repositoryNumbers {
+      display: flex;
+      align-items: center;
+      gap: 5rem;
+      margin: 2.5rem 0 5rem 0;
 
-      .formContent {
-        position: relative;
-      }
-
-      input {
-        font-size: 1.25rem;
-        color: var(--gray-700);
-        width: 100%;
-        border: 0;
-        border-radius: 5px;
-        padding: 1.5rem 14.5rem 1.5rem 1.5rem;
-
-        &::placeholder {
-          color: var(--dark-text);
-        }
-      }
-
-      button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: var(--green);
-        color: var(--white);
-        font-weight: 700;
-        max-width: 210px;
-        width: 100%;
-        height: 100%;
-        font-size: 1.125rem;
-        border: 0;
-        border-radius: 0 5px 5px 0;
-        position: absolute;
-        right: 0;
-        top: 0;
-        padding: 1.5rem;
-        transition: filter 0.2s;
-
-        &:hover {
-          filter: brightness(0.9);
+      .number {
+        strong {
+          font-size: 2.25rem;
+          color: var(--light-text);
         }
 
-        &:disabled {
-          background: var(--gray-400);
-          filter: brightness(1);
-          cursor: initial;
+        p {
+          font-size: 1.25rem;
+          color: var(--base-text);
+          margin-top: 0.25rem;
         }
-
-        .loadingWrap {
-          display: flex;
-        }
-      }
-
-      .error {
-        font-size: 1.125rem;
-        color: var(--red);
-        margin-top: 0.5rem;
       }
     }
   }

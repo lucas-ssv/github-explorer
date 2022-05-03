@@ -1,6 +1,6 @@
 import { HttpClient, HttpStatusCode } from '@/data/protocols/http'
 import { BadRequestError, NotFoundError, ServerError } from '@/domain/errors'
-import { RepositoryResultModel } from '@/domain/models'
+import { RepositoryResult } from '@/domain/models'
 import { LoadRepositoryResult } from '@/domain/usecases'
 
 export class RemoteLoadRepositoryResult implements LoadRepositoryResult {
@@ -9,7 +9,7 @@ export class RemoteLoadRepositoryResult implements LoadRepositoryResult {
     private readonly httpClient: HttpClient
   ) { }
 
-  async load (): Promise<RepositoryResultModel> {
+  async load (): Promise<RepositoryResult> {
     const httpResponse = await this.httpClient.request({ method: 'GET', url: this.url })
     switch (httpResponse.statusCode) {
       case HttpStatusCode.ok: return httpResponse.body

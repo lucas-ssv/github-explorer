@@ -1,5 +1,5 @@
-import { RepositoryResultModel } from '@/domain/models'
+import { RepositoryResult } from '@/domain/models'
 
 export interface LoadRepositoryResult {
-  load: () => Promise<RepositoryResultModel>
+  load: () => Promise<RepositoryResult>
 }

@@ -12,4 +12,18 @@
       color: var(--dark-text);
     }
   }
+
+  .backLink {
+    text-decoration: none;
+    margin-left: auto;
+
+    img {
+      margin-right: 0.75rem;
+    }
+
+    strong {
+      font-size: 1rem;
+      color: var(--dark-text);
+    }
+  }
 }
