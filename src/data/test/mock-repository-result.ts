@@ -1,7 +1,7 @@
-import { RepositoryResultModel } from '@/domain/models'
+import { RepositoryResult } from '@/domain/models'
 import { faker } from '@faker-js/faker'
 
-export const mockRepositoryResult = (): RepositoryResultModel => ({
+export const mockRepositoryResult = (): RepositoryResult => ({
   id: faker.datatype.number(),
   name: faker.name.firstName(),
   fullName: faker.name.findName(),

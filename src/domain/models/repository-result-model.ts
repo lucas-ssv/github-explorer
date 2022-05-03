@@ -1,4 +1,4 @@
-export interface RepositoryResultModel {
+export interface RepositoryResult {
   id: number
   name: string
   fullName: string
