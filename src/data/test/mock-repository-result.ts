@@ -10,6 +10,7 @@ export const mockRepositoryResult = (): RepositoryResult => ({
   issuesCount: faker.datatype.number(),
   starsCount: faker.datatype.number(),
   owner: {
-    name: faker.name.findName()
+    name: faker.name.findName(),
+    avatar_url: faker.image.avatar()
   }
 })
