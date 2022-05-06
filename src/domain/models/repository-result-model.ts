@@ -8,5 +8,6 @@ export interface RepositoryResult {
   issuesCount: number
   owner: {
     name: string
+    avatar_url: string
   }
 }

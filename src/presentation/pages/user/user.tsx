@@ -1,40 +1,57 @@
+import { RepositoryResult } from '@/domain/models'
+import { LoadRepositoryResult } from '@/domain/usecases'
 import { Header, RepositoryList, RepositoryResultItem } from '@/presentation/components'
 import Styles from './user-styles.scss'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-export const User: React.FC = () => {
+type Props = {
+  loadRepositoryResult: LoadRepositoryResult
+}
+
+export const User: React.FC<Props> = ({ loadRepositoryResult }: Props) => {
+  const [state, setState] = useState<RepositoryResult>()
+
+  useEffect(() => {
+    loadRepositoryResult.load().then(response => {
+      setState(response)
+    })
+  }, [])
+
   return (
     <div className={Styles.userWrap}>
       <Header />
-      <main className={Styles.repositoryContent}>
-        <div className={Styles.repositoryInfo}>
-          <img
-            src="https://images.unsplash.com/photo-1614102073832-030967418971?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=100&h=100&q=80"
-            alt="Imagem de perfil do usuário do Github"
-          />
-          <div className={Styles.ownerInfo}>
-            <strong>tiagoluchtenberg/repo</strong>
-            <p>Descrição do repo</p>
+      {state && (
+        <main className={Styles.repositoryContent}>
+          <div data-testid="repository-info" className={Styles.repositoryInfo}>
+            <img
+              data-testid="avatar-url"
+              src={state.owner.avatar_url}
+              alt={state.owner.name}
+            />
+            <div className={Styles.ownerInfo}>
+              <strong data-testid="repository-name">{state.name}</strong>
+              <p data-testid="repository-description">{state.description}</p>
+            </div>
           </div>
-        </div>
-        <div className={Styles.repositoryNumbers}>
-          <div className={Styles.number}>
-            <strong>1808</strong>
-            <p>Stars</p>
+          <div className={Styles.repositoryNumbers}>
+            <div className={Styles.number}>
+              <strong data-testid="stars-count">{state.starsCount}</strong>
+              <p>Stars</p>
+            </div>
+            <div className={Styles.number}>
+              <strong data-testid="forks-count">{state.forksCount}</strong>
+              <p>Forks</p>
+            </div>
+            <div className={Styles.number}>
+              <strong data-testid="issues-count">{state.issuesCount}</strong>
+              <p>Issues abertas</p>
+            </div>
           </div>
-          <div className={Styles.number}>
-            <strong>48</strong>
-            <p>Forks</p>
-          </div>
-          <div className={Styles.number}>
-            <strong>67</strong>
-            <p>Issues abertas</p>
-          </div>
-        </div>
-        <RepositoryList>
-          <RepositoryResultItem />
-        </RepositoryList>
-      </main>
+          <RepositoryList>
+            <RepositoryResultItem />
+          </RepositoryList>
+        </main>
+      )}
     </div>
   )
 }
