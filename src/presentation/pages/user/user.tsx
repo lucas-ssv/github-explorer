@@ -48,7 +48,7 @@ export const User: React.FC<Props> = ({ loadRepositoryResult }: Props) => {
             </div>
           </div>
           <RepositoryList>
-            <RepositoryResultItem />
+            <RepositoryResultItem repository={state} />
           </RepositoryList>
         </main>
       )}
