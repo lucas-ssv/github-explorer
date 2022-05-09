@@ -13,7 +13,7 @@ const HeaderComponent: React.FC = () => {
       />
       <strong>github<span>_explorer</span></strong>
       {id && (
-        <Link to="/" className={Styles.backLink}>
+        <Link data-testid="back-link" to="/" className={Styles.backLink}>
           <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOCIgaGVpZ2h0PSIxMiIgdmlld0JveD0iMCAwIDggMTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik04IDEwLjVMMyA2TDggMS41TDYuNjAwNjYgLTQuNDQ4MDFlLTA4TDYuNjc1NTZlLTA3IDZMNi42MDA2NiAxMkw4IDEwLjVaIiBmaWxsPSIjQThBOEIzIi8+Cjwvc3ZnPgo=" />
           <strong>Voltar</strong>
         </Link>

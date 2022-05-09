@@ -3,6 +3,7 @@ export interface RepositoryResult {
   name: string
   fullName: string
   description: string
+  htmlUrl: string
   starsCount: number
   forksCount: number
   issuesCount: number
