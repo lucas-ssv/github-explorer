@@ -6,6 +6,7 @@ export const mockRepositoryResult = (): RepositoryResult => ({
   name: faker.name.firstName(),
   fullName: faker.name.findName(),
   description: faker.random.words(),
+  htmlUrl: faker.internet.url(),
   forksCount: faker.datatype.number(),
   issuesCount: faker.datatype.number(),
   starsCount: faker.datatype.number(),
