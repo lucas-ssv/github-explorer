@@ -9,7 +9,7 @@ type Props = {
 
 export const RepositoryResultItem: React.FC<Props> = ({ repository }: Props) => {
   return (
-    <Link to={repository.htmlUrl}>
+    <Link data-testid="html-url" to={repository.htmlUrl}>
       <div className={Styles.repositoryResult}>
         <div className={Styles.info}>
           <strong data-testid="repository-full-name">{repository.fullName}</strong>
