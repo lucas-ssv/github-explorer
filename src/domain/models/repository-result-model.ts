@@ -1,14 +1,14 @@
 export interface RepositoryResult {
   id: number
   name: string
-  fullName: string
+  full_name: string
   description: string
-  htmlUrl: string
-  starsCount: number
-  forksCount: number
-  issuesCount: number
+  html_url: string
+  stargazers_count: number
+  forks_count: number
+  open_issues_count: number
   owner: {
-    name: string
+    login: string
     avatar_url: string
   }
 }

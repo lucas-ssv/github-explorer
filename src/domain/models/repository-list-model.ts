@@ -5,14 +5,14 @@ export interface RepositoryListModel {
 export interface RepositoryList {
   id: number
   name: string
-  fullName: string
+  full_name: string
   description: string
   htmlUrl: string
   starsCount: number
   forksCount: number
   issuesCount: number
   owner: {
-    name: string
+    login: string
     avatar_url: string
   }
 }

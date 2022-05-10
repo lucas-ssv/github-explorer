@@ -4,5 +4,5 @@ import { makeApiUrl, makeAxiosHttpClient } from '@/main/factories/http'
 
 export const makeRemoteLoadRepositoryList = (): LoadRepositoryList => {
   const url = makeApiUrl()
-  return new RemoteLoadRepositoryList(url, makeAxiosHttpClient())
+  return new RemoteLoadRepositoryList(`${url}/search/repositories`, makeAxiosHttpClient())
 }

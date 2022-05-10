@@ -4,14 +4,14 @@ import { faker } from '@faker-js/faker'
 export const mockRepositoryResult = (): RepositoryResult => ({
   id: faker.datatype.number(),
   name: faker.name.firstName(),
-  fullName: faker.name.findName(),
+  full_name: faker.name.findName(),
   description: faker.random.words(),
-  htmlUrl: faker.internet.url(),
-  forksCount: faker.datatype.number(),
-  issuesCount: faker.datatype.number(),
-  starsCount: faker.datatype.number(),
+  html_url: faker.internet.url(),
+  forks_count: faker.datatype.number(),
+  open_issues_count: faker.datatype.number(),
+  stargazers_count: faker.datatype.number(),
   owner: {
-    name: faker.name.findName(),
+    login: faker.name.findName(),
     avatar_url: faker.image.avatar()
   }
 })

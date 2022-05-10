@@ -26,8 +26,8 @@ describe('RepositoryItem', () => {
     const repositoryListMock = mockRepositoryList()
     makeSut(repositoryListMock)
     expect(screen.getByTestId('image-profile')).toHaveProperty('src', repositoryListMock.owner.avatar_url)
-    expect(screen.getByTestId('image-profile')).toHaveProperty('alt', repositoryListMock.owner.name)
-    expect(screen.getByTestId('full-name')).toHaveTextContent(repositoryListMock.fullName)
+    expect(screen.getByTestId('image-profile')).toHaveProperty('alt', repositoryListMock.owner.login)
+    expect(screen.getByTestId('full-name')).toHaveTextContent(repositoryListMock.full_name)
     expect(screen.getByTestId('description')).toHaveTextContent(repositoryListMock.description)
   })
 
@@ -36,6 +36,6 @@ describe('RepositoryItem', () => {
     const { history } = makeSut(repositoryListMock)
     const link = screen.getByTestId('repository-item')
     fireEvent.click(link)
-    expect(history.location.pathname).toBe(`/${repositoryListMock.name}`)
+    expect(history.location.pathname).toBe(`/${repositoryListMock.owner.login}/${repositoryListMock.name}`)
   })
 })
