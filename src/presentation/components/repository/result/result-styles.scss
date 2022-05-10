@@ -1,3 +1,5 @@
+
+
 .repositoryResult {
   display: flex;
   align-items: center;
@@ -6,6 +8,7 @@
   border-radius: 5px;
   padding: 1.5rem;
   position: relative;
+  text-decoration: none;
 
   &::after {
     content: '';

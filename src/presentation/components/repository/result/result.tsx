@@ -1,7 +1,6 @@
 import Styles from './result-styles.scss'
 import React from 'react'
 import { RepositoryResult } from '@/domain/models'
-import { Link } from 'react-router-dom'
 
 type Props = {
   repository: RepositoryResult
@@ -9,13 +8,11 @@ type Props = {
 
 export const RepositoryResultItem: React.FC<Props> = ({ repository }: Props) => {
   return (
-    <Link data-testid="html-url" to={repository.htmlUrl}>
-      <div className={Styles.repositoryResult}>
-        <div className={Styles.info}>
-          <strong data-testid="repository-full-name">{repository.fullName}</strong>
-          <p data-testid="repository-description-result">{repository.description}</p>
-        </div>
+    <a data-testid="html-url" href={repository.html_url} className={Styles.repositoryResult} target="_blank">
+      <div className={Styles.info}>
+        <strong data-testid="repository-full-name">{repository.full_name}</strong>
+        <p data-testid="repository-description-result">{repository.description}</p>
       </div>
-    </Link>
+    </a>
   )
 }

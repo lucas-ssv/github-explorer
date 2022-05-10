@@ -13,7 +13,7 @@ const history = createMemoryHistory()
 
 describe('HeaderComponent', () => {
   test('Should show back button if has param id in the url', () => {
-    jest.spyOn(Router, 'useParams').mockReturnValue({ id: faker.random.word() })
+    jest.spyOn(Router, 'useParams').mockReturnValue({ owner: faker.random.word(), repo: faker.random.word() })
     render(
       <RouterNavigate location={history.location} navigator={history}>
         <Header />

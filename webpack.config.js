@@ -40,7 +40,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new EnvironmentPlugin({
-      API_URL: 'https://api.github.com/search/repositories'
+      API_URL: 'https://api.github.com'
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public', 'index.html'),
