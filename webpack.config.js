@@ -9,7 +9,7 @@ module.exports = {
   devtool: 'inline-source-map',
   module: {
     rules: [{
-      test: /\.tsx?$/,
+      test: /\.ts(x?)$/,
       use: 'ts-loader',
       exclude: /node_modules/
     }, {
@@ -30,9 +30,13 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'public', 'js'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   devServer: {
+    devMiddleware: {
+      writeToDisk: true
+    },
     static: {
       directory: path.resolve(__dirname, 'public')
     }

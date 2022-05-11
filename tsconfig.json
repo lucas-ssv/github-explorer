@@ -21,6 +21,7 @@
   "exclude": [
     "./jest.config.js",
     "./webpack.config.js",
-    "./coverage"
+    "./coverage",
+    "./src/main/test/cypress"
   ]
 }

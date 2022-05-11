@@ -10,7 +10,8 @@ module.exports = {
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/src/main/config/jest-setup.ts'],
   testPathIgnorePatterns: [
-    '<rootDir>/node_modules'
+    '<rootDir>/node_modules/',
+    '<rootDir>/src/main/test/cypress'
   ],
   preset: 'ts-jest',
   transform: {
