@@ -1,11 +1,21 @@
 {
-  "extends": "standard-with-typescript",
+  "extends": ["standard-with-typescript", "plugin:cypress/recommended"],
   "parserOptions": {
-    "project": "./tsconfig.json"
+    "project": "./tsconfig-eslint.json"
+  },
+  "plugins": ["cypress"],
+  "env": {
+    "cypress/globals": true
   },
   "rules": {
     "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/consistent-type-definitions": "off",
-    "@typescript-eslint/no-floating-promises": "off"
+    "@typescript-eslint/no-floating-promises": "off",
+    "cypress/no-assigning-return-values": "error",
+    "cypress/no-unnecessary-waiting": "error",
+    "cypress/assertion-before-screenshot": "warn",
+    "cypress/no-force": "warn",
+    "cypress/no-async-tests": "error",
+    "cypress/no-pause": "error"
   }
 }
