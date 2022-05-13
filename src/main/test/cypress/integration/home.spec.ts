@@ -30,4 +30,10 @@ describe('Home', () => {
       .getByTestId('loading-wrap').should('not.exist')
       .getByTestId('text-search-button').should('exist')
   })
+
+  it('Should clear input if form is valid', () => {
+    cy.getByTestId('repository-input').type(faker.random.word())
+    cy.getByTestId('submit-button').click()
+    cy.getByTestId('repository-input').should('be.empty')
+  })
 })
