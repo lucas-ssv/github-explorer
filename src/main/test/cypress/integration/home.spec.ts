@@ -36,4 +36,10 @@ describe('Home', () => {
     cy.getByTestId('submit-button').click()
     cy.getByTestId('repository-input').should('be.empty')
   })
+
+  it('Should focus input if form is valid', () => {
+    cy.getByTestId('repository-input').type(faker.random.word())
+    cy.getByTestId('submit-button').click()
+    cy.getByTestId('repository-input').should('be.focused')
+  })
 })
