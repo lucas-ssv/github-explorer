@@ -15,4 +15,10 @@ describe('Home', () => {
     cy.getByTestId('repository-input').type(faker.random.word())
     cy.getByTestId('submit-button').should('be.enabled')
   })
+
+  it('Should show loading if form is valid', () => {
+    cy.getByTestId('repository-input').type(faker.random.word())
+    cy.getByTestId('submit-button').click()
+    cy.getByTestId('loading-wrap').should('exist')
+  })
 })
