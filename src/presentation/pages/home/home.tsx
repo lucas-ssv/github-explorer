@@ -55,7 +55,7 @@ export const Home: React.FC<Props> = ({ loadRepositoryList }: Props) => {
                   />
                 </div>
                   )
-                : <strong>Pesquisar</strong>}
+                : <strong data-testid="text-search-button">Pesquisar</strong>}
             </button>
           </div>
           {state.error && <p data-testid="error" className={Styles.error}>{state.error}</p>}

@@ -11,6 +11,8 @@
     "test:ci": "npm run test -- --coverage",
     "test:coveralls": "npm run test:ci && coveralls < coverage/lcov.info",
     "test:cypress": "cypress open",
+    "test:cypress:run": "cypress run",
+    "test:cypress:ci": "start-server-and-test start http://localhost:8080 test:cypress:run",
     "lint-staged": "lint-staged",
     "prepare": "husky install"
   },
@@ -44,6 +46,7 @@
     "lint-staged": "^12.3.7",
     "sass": "^1.50.0",
     "sass-loader": "^12.6.0",
+    "start-server-and-test": "^1.14.0",
     "style-loader": "^3.3.1",
     "ts-jest": "^27.1.4",
     "ts-loader": "^9.2.8",
