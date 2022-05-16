@@ -1,0 +1,29 @@
+{
+  "items": [{
+    "id": 1,
+    "name": "any_name",
+    "full_name": "any_full_name",
+    "description": "any_description",
+    "htmlUrl": "any_html_url",
+    "starsCount": "any_stars_count",
+    "forksCount": "any_forks_count",
+    "issuesCount": "any_issues_count",
+    "owner": {
+      "login": "any_login",
+      "avatar_url": "any_avatar_url"
+    }
+  }, {
+    "id": 2,
+    "name": "other_name",
+    "full_name": "other_full_name",
+    "description": "other_description",
+    "htmlUrl": "other_html_url",
+    "starsCount": "other_stars_count",
+    "forksCount": "other_forks_count",
+    "issuesCount": "other_issues_count",
+    "owner": {
+      "login": "other_login",
+      "avatar_url": "other_avatar_url"
+    }
+  }]
+}

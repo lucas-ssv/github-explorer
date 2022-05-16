@@ -35,7 +35,7 @@ export const Home: React.FC<Props> = ({ loadRepositoryList }: Props) => {
       <Header />
       <section className={Styles.homeContent}>
         <h1>Explore repositórios no Github</h1>
-        <form onSubmit={handleSubmit}>
+        <form data-testid="form-submit" onSubmit={handleSubmit}>
           <div className={Styles.formContent}>
             <input
               data-testid="repository-input"
