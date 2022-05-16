@@ -73,4 +73,17 @@ describe('Home', () => {
     cy.getByTestId('submit-button').click()
     cy.getByTestId('error').should('exist')
   })
+
+  it('Should present badRequestError on 400', () => {
+    const repository = faker.random.word()
+    cy.intercept({
+      method: 'GET',
+      url: `https://api.github.com/search/repositories?q=${repository}`
+    }, {
+      statusCode: 400
+    })
+    cy.getByTestId('repository-input').type(repository)
+    cy.getByTestId('submit-button').click()
+    cy.getByTestId('error').should('have.text', 'Ocorreu um erro na requisição. Tente novamente mais tarde')
+  })
 })
