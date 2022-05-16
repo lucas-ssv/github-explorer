@@ -99,4 +99,17 @@ describe('Home', () => {
     cy.getByTestId('submit-button').click()
     cy.getByTestId('error').should('have.text', 'O servidor não pode encontrar o recurso solicitado')
   })
+
+  it('Should present serverError on 500', () => {
+    const repository = faker.random.word()
+    cy.intercept({
+      method: 'GET',
+      url: `https://api.github.com/search/repositories?q=${repository}`
+    }, {
+      statusCode: 500
+    })
+    cy.getByTestId('repository-input').type(repository)
+    cy.getByTestId('submit-button').click()
+    cy.getByTestId('error').should('have.text', 'O servidor encontrou uma situação com a qual não sabe lidar')
+  })
 })
