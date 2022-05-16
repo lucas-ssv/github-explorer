@@ -112,4 +112,20 @@ describe('Home', () => {
     cy.getByTestId('submit-button').click()
     cy.getByTestId('error').should('have.text', 'O servidor encontrou uma situação com a qual não sabe lidar')
   })
+
+  it('Should load user page on click repository', () => {
+    const repository = faker.random.word()
+    cy.intercept({
+      method: 'GET',
+      url: `https://api.github.com/search/repositories?q=${repository}`
+    }, {
+      statusCode: 200,
+      fixture: 'load-repository-list.json'
+    }).as('request')
+    cy.getByTestId('repository-input').type(repository)
+    cy.getByTestId('form-submit').submit()
+    cy.wait('@request')
+    cy.getByTestId('repository-item').eq(0).click()
+    cy.url().should('eq', 'http://localhost:8080/any_login/any_name')
+  })
 })
