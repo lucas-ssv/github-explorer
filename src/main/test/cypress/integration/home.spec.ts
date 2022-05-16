@@ -42,4 +42,20 @@ describe('Home', () => {
     cy.getByTestId('submit-button').click()
     cy.getByTestId('repository-input').should('be.focused')
   })
+
+  it('Should present error on UnexpectedError', () => {
+    const repository = faker.random.word()
+    cy.intercept({
+      method: 'GET',
+      url: `https://api.github.com/search/repositories?q=${repository}`
+    }, {
+      statusCode: faker.random.arrayElement([400, 404, 500]),
+      body: {
+        error: faker.random.words()
+      }
+    })
+    cy.getByTestId('repository-input').type(repository)
+    cy.getByTestId('submit-button').click()
+    cy.getByTestId('error').should('exist')
+  })
 })
