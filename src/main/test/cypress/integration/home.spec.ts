@@ -43,6 +43,21 @@ describe('Home', () => {
     cy.getByTestId('repository-input').should('be.focused')
   })
 
+  it('Should call LoadRepositoryList only once', () => {
+    const repository = faker.random.word()
+    cy.intercept({
+      method: 'GET',
+      url: `https://api.github.com/search/repositories?q=${repository}`
+    }, {
+      statusCode: 200,
+      fixture: 'load-repository-list.json'
+    }).as('request')
+    cy.getByTestId('repository-input').type(repository)
+    cy.getByTestId('form-submit').submit()
+    cy.getByTestId('form-submit').submit()
+    cy.get('@request.all').should('have.length', 1)
+  })
+
   it('Should present error on UnexpectedError', () => {
     const repository = faker.random.word()
     cy.intercept({
