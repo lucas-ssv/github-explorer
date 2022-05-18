@@ -37,7 +37,8 @@ module.exports = merge(common, {
       API_URL: 'https://api.github.com'
     }),
     new HtmlWebpackPlugin({
-      template: './template.dev.html'
+      template: './template.dev.html',
+      favicon: './public/favicon.png'
     })
   ]
 })

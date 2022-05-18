@@ -31,7 +31,8 @@ module.exports = merge(common, {
       API_URL: 'https://api.github.com'
     }),
     new HtmlWebpackPlugin({
-      template: './template.prod.html'
+      template: './template.prod.html',
+      favicon: './public/favicon.png'
     }),
     new MiniCssExtractPlugin({
       filename: 'main-bundle-[contenthash].css'
