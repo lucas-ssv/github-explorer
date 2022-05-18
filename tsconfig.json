@@ -20,8 +20,11 @@
   },
   "exclude": [
     "./jest.config.js",
-    "./webpack.config.js",
+    "./webpack.common.js",
     "./coverage",
-    "./src/main/test/cypress"
+    "./src/main/test/cypress",
+    "./public",
+    "./dist",
+    "./index.js"
   ]
 }
